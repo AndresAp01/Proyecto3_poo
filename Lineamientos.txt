@@ -1,0 +1,137 @@
+Ingeniería en Computación
+IC2101 Programación Orientada a Objetos
+Especificación III Proyecto
+Campus Central / Campus Tecnológico Local San José
+Grupos 40
+Propuesta ERS 3% Proyecto III 15%
+Se ha contemplado el tema de modelado de software y construcción de una propuesta de modelaje
+y especificación de una aplicación por medio de la herramienta de diagramas de casos de uso y
+prototipos, esto con el fin de fabricar una especificación de requerimientos funcionales para una
+solución de información.
+A partir de construir el escenario de funcionalidades necesarias para cumplir con los objetivos de
+información de un contexto dado, se puede iniciar el proceso de diseño e implementación de dicha
+solución.
+Este proyecto final consta de dos partes: una propuesta de aplicación y un prototipo con un valor
+de 3% y la implementación de la propuesta con su respectivo documento de especificación de
+requerimientos de software con un valor de 15%.
+Propuesta de Aplicación
+En la primera parte se presentan dos contextos de problemas, donde cada equipo de trabajo analiza
+y decide uno sobre el cual le gustaría desarrollar su propuesta de solución. Es importante anotar
+que los contextos expuestos no aportan todo el nivel de detalle de los datos a manejar y un listado
+de funcionalidades, sino que es responsabilidad del equipo, ahondar sobre el tema escogido para
+formular la delimitación o alcance de la propuesta de la aplicación que se va a construir.
+Entonces el equipo debe entregar a más tardar el jueves 13 de noviembre al final del día, un
+documento de avance en la parte de Evaluaciones > Tareas > Propuesta Preliminar Proyecto 3, que
+contenga:
+1. El contexto seleccionado
+2. Un resumen (marco teórico) de la delimitación del contexto sobre el que se van a enfocar,
+lo que permite establecer mejor el alcance de las funcionalidades a implementar, siempre
+y cuando se tenga en cuenta que deben incluirse los servicios que puedan ser construidos
+bajo las consideraciones técnicas exigidas en cada uno de los contextos.
+3. Referencias bibliográficas digitales consultadas que le dan fundamento a su delimitación.
+4. Diagramas de casos de uso asociados a su propuesta de solución.
+5. Imágenes de prototipo asociado a las pantallas que acompañarían su propuesta, y de ser
+posible, el link de acceso.
+Este documento debe llamarse Propuesta ERS AlcanceCasoXGrupoY.pdf donde X es un número
+entre 1 y 2 (numeración del caso escogido) y Y el número de grupo en el TecDigital.
+En semana 14 se analizará el documento de especificación en clase y la plantilla que da soporte a la
+redacción de cada uno de los casos de uso propuestos. De este modo, al recibir el visto bueno de la
+propuesta, durante semana 15, se debe iniciar el proceso de emplantillado de los casos de uso, la
+elaboración del documento de especificación de requerimientos y la implementación de la
+propuesta realizada y aprobada.
+El proyecto final (aplicación, especificación y otra documentación) se entrega y revisa entre martes
+2 y miércoles 3 de diciembre de semana 18 con cita previa para la revisión.
+Documentación extra al ERS
+En la semana 18, al momento de la defensa y entrega del proyecto, cada equipo debe proveer el
+código fuente del producto generado junto con un documento forma de documentación que
+incluya:
+a. Portada, introducción, tabla de contenidos.
+b. Descripción del contexto seleccionado de su aplicación.
+C.
+Enlace al documento de especificación de requerimientos.
+d. Diagrama de componentes en el que muestran la división modular en la que han
+conceptualizado la aplicación
+e. Diagrama lógico de clases bajo una arquitectura de capas MVC que da solución al producto
+propuesto.
+f. Evidencia de código que refleje la implementación de herencia (clases y métodos
+abstractos, o interfaces y clases concretas que le implementen) de acuerdo con lo
+presentado en el diagrama lógico de clases.
+g. Evidencia de código que refleje el uso e implementación de excepciones tanto del entorno
+como personalizadas.
+h. Evidencia de manejo de archivos de texto y/o binario de datos de acuerdo con lo expresado
+como necesidad en el contexto de los casos ofrecidos. Evidencia del manejo de excepciones
+definido por el equipo.
+i. Resumen de resultados a nivel de equipo de trabajo en cuanto a organización y distribución
+y cumplimiento de tareas asignadas. Lecciones aprendidas al respecto.
+j. Estado de completitud y correctitud funcional de la aplicación desarrollada, esto es,
+presente un cuadro que contenga la lista de las funcionalidades ofrecidas y su estado al final
+de la implementación, incluyendo porcentaje de logro y en caso de no ser 100% las razones
+de su progreso parcial.
+Contexto 1: Sistema de Monitoreo Integrado de Salud mediante Wearables
+Las condiciones de salud relacionadas con el estrés crónico, enfermedades
+cardiovasculares, trastornos metabólicos y problemas respiratorios
+pueden ser identificadas tempranamente mediante el monitoreo continuo de parámetros
+fisiológicos como frecuencia cardíaca, calidad del sueño, niveles de glucosa, variabilidad
+cardíaca o actividad física.
+Sin embargo, los datos provenientes de dispositivos wearables suelen quedar dispersos en
+múltiples plataformas y no se integran de forma centralizada para análisis clínico.
+El propósito del sistema es consolidar indicadores de salud, detectar tendencias y riesgos,
+facilitar decisiones informadas y fomentar la participación del usuario en el cuidado
+preventivo de su salud.
+Requerimientos Funcionales
+RF-01 - Registro de Usuario: El sistema debe permitir crear y gestionar un perfil personal de
+salud.
+RF-02 Registrar Dispositivo Wearable: El usuario debe poder asociar uno o varios
+wearables a su cuenta.
+RF-03 Sincronizar Datos: El sistema debe recibir y almacenar datos fisiológicos
+provenientes de los dispositivos. (SIMULACION)
+RF-04 - Procesamiento Automático de Métricas: El sistema debe normalizar datos y calcular
+indicadores derivados.
+RF-05 - Consultar Historial de Métricas: Debe permitir visualizar métricas en intervalos
+configurables.
+RF-06 - Configurar Perfil de Salud: El usuario puede establecer metas personales y actualizar
+datos relevantes.
+RF-07 - Establecer Rangos de Referencia: Usuario y/o profesional definen umbrales para
+alertas personalizadas.
+RF-08 - Generar Alertas Automáticas: El sistema debe generar notificaciones por valores
+fuera de rango. (simulación)
+RF-09 - Compartir Información con Profesional: El usuario controla acceso a su historial con
+profesionales de salud.
+RF-10 - Generar Reporte Consolidado: El profesional puede generar resúmenes de métricas
+integradas.
+RF-11 Emitir Recomendaciones Personalizadas: El profesional registra pautas e
+indicaciones clínicas basadas en el análisis.
+RF-12 - Notificar Disponibilidad de Recomendaciones: El sistema notifica al usuario cuando
+se registren nuevas recomendaciones.
+Requerimientos No Funcionales
+RNF-01 - Seguridad: El sistema debe cifrar datos en tránsito y almacenamiento.
+RNF-02 - Privacidad: El tratamiento de datos clínicos debe cumplir normativa aplicable.
+RNF-03 - Usabilidad: La interfaz debe ser accesible y adaptable a dispositivos móviles.
+RNF-04 - Auditabilidad: Toda acción debe quedar registrada con trazabilidad.
+RNF-05 - Interoperabilidad: Integración con APIs estándar de wearables.
+Contexto 2: Plataforma de Coordinación de Brigadas de Apoyo Comunitario
+Las comunidades vulnerables enfrentan desafíos relacionados con vivienda precaria, inseguridad
+alimentaria y atención a personas en riesgo.
+Sin embargo, la gestión tradicional de brigadas de apoyo suele ser informal y carente de registro
+sistemático, lo que dificulta la transparencia y efectividad.
+El propósito de la plataforma es coordinar brigadas, gestionar recursos, convocar voluntarios y
+mantener un historial de actividades para fortalecer la respuesta comunitaria.
+Requerimientos Funcionales
+RF-01 - Registrar Brigada Comunitaria: El coordinador crea brigadas según tipo de ayuda.
+RF-02 - Registrar Voluntarios: El sistema permite registrar y administrar perfiles de voluntarios.
+RF-03 - Asociar Voluntarios a Brigadas: El coordinador asigna voluntarios a brigadas.
+RF-04 - Planificar Actividades: El coordinador define fecha, lugar, objetivo y beneficiarios.
+RF-05 - Asignar Voluntarios a Actividades: Permite solicitar disponibilidad y confirmar
+participación.
+RF-06 - Asignar Recursos: El sistema gestiona materiales y herramientas necesarios.
+RF-07 - Registrar Resultados: Se documentan resultados e impacto.
+RF-08 - Consultar Historial: Permite visualizar actividades previas.
+RF-09 - Convocar Voluntarios Urgentes: El sistema envía avisos automáticos a voluntarios
+disponibles.
+RF-10 - Consultar Disponibilidad de Recursos: Permite revisar inventario comunitario.
+Requerimientos No Funcionales
+RNF-01 - Seguridad: El sistema debe autenticar y autorizar accesos.
+RNF-02 - Privacidad: Protección de datos personales de voluntarios.
+RNF-03 - Rendimiento: Convocatorias deben enviarse rápidamente.
+RNF-04 - Usabilidad: Interfaz adecuada para usuarios con bajo nivel técnico.
+RNF-05 - Escalabilidad: Soportar aumento de usuarios sin pérdida de eficiencia.

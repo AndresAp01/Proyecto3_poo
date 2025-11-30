@@ -1,0 +1,363 @@
+Propuesta Preliminar para el Tercer Proyecto de Programación
+Orientada a Objetos
+Grupo 4
+Campus Tecnológico Central Cartago
+Acuña Perez Luis Andres
+Arias Zelaya Natalie Sofia
+Funes Ramírez Sara Annette
+Porras Fernandez Gabriel
+Primera Parte
+Se ha seleccionado el contexto número 2: Plataforma de Coordinación de Brigadas de Apoyo
+Comunitario, dedicado a la asignación de brigadas para combatir problemáticas en la sociedad
+comunal, de modo que sea de beneficio en la mejora de su organización y transparencia frente al
+resto de comunales.
+Segunda Parte
+El contexto sobre el que se enfoca el proyecto es crear una aplicación que implemente
+funcionalidades útiles para lograr la formalización de las organizaciones comunales denominadas
+brigadas, se establece el requerimiento de registro sistemático, ello con el fin de aumentar los
+niveles de efectividad en cuanto a las labores que llevan a cabo estas organizaciones, así como
+aumentar la transparencia en cuanto a los procesos que se llevan a cabo en las mismas. Para lograr
+el cumplimiento de estos requerimientos se deben establecer las delimitaciones concisas que
+faciliten la realización de la solución, por lo que dichas delimitaciones se describen a continuación:
+En primer lugar, el programa se centrará en la formación y coordinación de brigadas como medio
+único para la realización de actividades para el apoyo comunitario, dando uso de los perfiles de
+Coordinador y de Voluntario, cuyos se presentarán a mayor detalle en breve.
+Asimismo, el programa está limitado a la gestión de los elementos vitales para la realización de
+cada actividad: los voluntarios, las brigadas, inventario de los recursos y registro de actividades.
+Consideraciones externas como transporte, monitoreo geográfico o análisis de situaciones están
+descartadas a la hora de organizar brigadas y actividades.
+Para comprender mejor la razón y los usos prácticos de este programa, es útil poner en perspectiva
+casos reales con funciones similares a este. Por ejemplo, ONU maneja un programa de
+voluntariado "United Nations Volunteers” que contribuye al voluntariado y participación en tareas
+para promover el desarrollo, donde se gestionan perfiles de voluntarios, registro de actividades y
+historial de participación.
+Por otra parte, el Comité Internacional de la Cruz Roja, enfocado en la respuesta comunitaria y
+situaciones de emergencia, utilizan módulos de inventario, clasificación de recursos y asignación
+de personal según sus capacidades. Aunque se trate de una organización a mayor escala, esto pone
+en perspectiva el rol que toma la gestión de recursos necesarios para satisfacer tareas y necesidades.
+Las soluciones digitales de gestión urbana facilitan la administración de terrenos, viviendas y
+servicios públicos mediante mapas interactivos y bases de datos actualizadas. Estos sistemas
+permiten a los gobiernos planificar mejor el crecimiento urbano, identificar necesidades de
+infraestructura y promover políticas de vivienda más transparentes y eficientes, generando mejoras
+en la formalidad de los procesos y mejorando la calidad de vida en comunidades vulnerables
+(Banco Interamericano de Desarrollo, 2021).
+Los sistemas de historia clínica electrónica permiten que los profesionales de la salud gestionen
+de manera integrada la información médica de cada paciente. Estas plataformas centralizan
+diagnósticos, tratamientos, estudios y antecedentes, lo cual reduce los errores clínicos y facilita la
+continuidad del cuidado. Además, mejoran la coordinación entre médicos, laboratorios y
+hospitales, lo que se traduce en intervenciones más oportunas y en una atención más eficiente y
+segura (Ministerio de Salud, 2020).
+Según la Organización para la Cooperación y el Desarrollo Económicos. (2019) los entornos
+virtuales de aprendizaje, como los LMS, ofrecen a los docentes y los estudiantes un espacio
+organizado donde se pueden distribuir materiales, gestionar tareas, evaluar progresos y mantener
+comunicación constante. Estas plataformas amplían el acceso a la educación, generando un
+aumento en la cantidad de personas que pueden recibir educación sin necesidad de tener que
+trasladarse físicamente, además, permiten adaptar el ritmo de estudio a las necesidades de cada
+persona y fortalecen los procesos formativos, especialmente en contextos donde la educación
+presencial es limitada ().
+Diversas iniciativas de banca móvil han contribuido a que comunidades previamente excluidas del
+sistema financiero tradicional puedan integrarse a la economía formal. Gracias a estas plataformas
+digitales, las personas pueden realizar pagos, transferencias y otras operaciones de manera sencilla
+y segura, lo que favorece su autonomía económica y amplía sus oportunidades de participación
+financiera (Banco Mundial, 2023).
+Para este proyecto se ha decidido la implementación de dos perfiles, los cuales dependiendo de
+cuál sea el indicado en el inicio de sesión, se podrá acceder a ciertas funcionalidades. Los perfiles
+se describen a continuación:
+Perfil Coordinador:
+*Puede generar un CRUD de brigadas:
+-Crear: Escoge los tipos de voluntarios que encajen con el objetivo, asigna
+automáticamente, escoge los beneficiarios como sector, indica las actividades que desea que esa
+brigada realice.
+-Modificar: Asignar un nuevo tipo de voluntario.
+-Eliminar: Eliminar una brigada, mantiene los voluntarios y los reasigna a disponibles.
+-Búsqueda: Indica nombre y despliega los datos.
+*Puede hacer CRUD de voluntarios:
+-Crea X cantidad de voluntarios.
+-Modifica: cambiar voluntario de brigada o devolverlo a disponible.
+-Elimina X voluntario.
+-Busca la información de X voluntario.
+*Puede hacer CRUD de inventario:
+-Crea: define si es un material o herramienta, define la cantidad en existencia, define el
+nombre y el ID se asigna automáticamente.
+-Modifica: La cantidad de X elemento.
+-Elimina X objeto.
+-Búsqueda de X objeto.
+*Puede registrar un voluntario:
+-ID, estado de disponibilidad y fecha de ingreso asignado automáticamente, indica los tipos
+de colaborador que desea ser el voluntario, indica nombre, dirección, teléfono,
+Perfil Voluntario:
+*Puede visualizar su propia información, y cambiar algunos elementos de la misma.
+Con el fin de establecer estandarización y seguridad en el programa, se ha decidido establecer
+ciertos elementos, como que en la interfaz principal se pueden visualizar 4 botones, el primero de
+izquierda a derecha siendo el botón del historial de procesos concluídos y los que están en proceso,
+el segundo botón permite la visualización del inventario a fin de cumplir con el requisito de la
+transparencia, el tercer botón indica el inicio de sesión, dependiendo de los datos ingresados por
+el usuario podrá realizar algunas u otras opciones, por último se encuentra el botón de simular.
+Por otro lado, están los elementos estandarizadores:
+-Tipos de beneficiarios(sectores): niños, jóvenes, adultos, adultos mayores, discapacitados.
+-Tipos de vulnerabilidades: vivienda, alimentación, personas en riesgo(salud y educación).
+-Tipos de voluntarios: económico, mano de obra, educación, cocinero, médico.
+-Estados de los voluntarios: disponible, noDisponible.
+Algunos de los elementos aquí expuestos ya pueden ser visualizados como elementos técnicos, por
+ejemplo voluntarios, ya que pueden ser de varios tipos y sus funciones desempeñarse de formas
+muy distintas, lo que puede visualizarse como herencia y muy posiblemente a partir de una clase
+abstracta. Se requiere la permanencia de la información, por lo que se demanda la implementación
+del uso de archivos, se ha meditado la posibilidad de utilizar archivos binarios para los datos de
+los voluntarios con el fin de cumplir con salvaguardar la información privada de cada uno, se ha
+visualizado la necesidad de la implementación de excepciones personalizadas en casos donde no
+hayan voluntarios disponibles o que ya no quede inventario de algún objeto y demás situaciones
+que pueden surgir en la ejecución del programa.
+Tercera Parte
+Referencia Bibliográfica
+Banco Interamericano de Desarrollo. (2021). Tecnologías digitales para la gestión urbana y
+mejora del acceso a la vivienda. BID.
+Lough, Benjamin J. (2015) The Evolution of International Volunteering. University of Illinois
+Urbana-Champaign.
+https://web.archive.org/web/20170809212332/http://www.buildingbridgescoalition.org/wp-
+content/uploads/2015/10/The-Evolution-of-International-Volunteering-10.12.15.pdf
+Ministerio de Salud. (2020). Implementación de historias clínicas electrónicas en sistemas
+sanitarios modernos. Gobierno Nacional.
+Organización para la Cooperación y el Desarrollo Económicos. (2019). Transformación educativa
+mediante plataformas digitales de aprendizaje. OCDE.
+Sommerville, I. (2011).
+Ingeniería de software (9.ª ed.). Pearson Educación.
+https://apps.utel.edu.mx/recursos/files/r161r/w25469w/ingdelsoftwarelibro9_compressed.pdf
+Cuarta Parte
+Programa
+Mabor la lors
+Manejar
+Inventario
+Visna Inventado
+Herramientes
+Asignar Activ kelad
+Coordinador
+Menejer Frigsdes
+Voluntario
+Manejar
+Voluntarios
+Consultar Indo
+"similar a pedido, actividad
+puede tener raferencia a brigada
+Poluerada, materieles usados
+ate.
+nanuncion
+Paraaro
+Registrarse
+Modo de
+cooperacion
+preferid
+Vista Actividcdes
+Omnisciente
+Beneficiario
+https://lucid.app/lucidchart/adea89ce-a1a4-424a-88e4-3150674df2df/edit?viewport_loc=-
+461%2C-197%2C3028%2C1576%2C0 0&invitationId=inv 164c17f2-f5dc-4405-8dfd-
+3e593b419841
+Quinta Parte
+Página 2
+Historial
+Actividades
+க
+Visualizar
+Inventario
+Sesión
+L Simular
+<
+V
+Usuario
+Contraseña
+Ingresar
+consola
+V
+Simulación
+***
+<
+mas alto
+Inventario
+ID Nombre Categoría Cant.
+<
+Historial Actividades
+id nombre
+Fecha Tipo
++ Ver más
+<
+table view
+Actividad: 4707
+Aprendamos Jugando
+Tipols
+Educación
+Estado
+Finalizado
+Integrantes
+Doña Carmen
+Paquito Pacal
+Inicio
+Fin
+14/07/2025 23/10/2025
+0
+0
+tigo 1
+tipo 2
+Voluntario
+<
+Voluntario: Nombre
+Mis Datos
+Nombre: Paco
+Apellidos: Pacal
+Telefono:
+Dirección:
+Historial
+Tipos Actividades
+V
+Estado:
+OSI
+Ο No
+Stable view
+Admin
+Coordinador
+Gestión Brigadas
+Gestionar Brigadas
+Gestión Voluntarios
++ Crear
+Eliminar
+Gestión Inventario
+Modificar
+☑ Buscar
+Gestión Actividad
+Eliminar
+Cancelar Eliminar
+Crear
+Actividad
+V
+ID
+Categoría
+V
+Voluntarios
+alert
+L
+7 de exito
+Asig. Auto
+Manual
+Cancelar Crear
+check box
+-slider
+Nombre
+21
+Asignar
+Busqueda
+ID: 8059
+ID
+Actividad: ID-Nombre
+Cancelar
+Buscar
+->
+Categoría: Enum Cate
+check box
+Voluntarios: Lista
+Volver
+Modificar
+Categoría:
+Voluntarios: Lista
+Cancelar Modificar
+slider
+Nombre
+21
+Asignar
+V
+Coordinador
+<
+Gestionar Voluntarios.
+Gestión Brigadas
+Gestión Voluntarios
++ Crear
+Eliminar
+Gestión Inventario
+Modificar
+Buscar
+Gestión Actividad
+L
+ID:
+Crear Usuario
+Fecha Nacimiento: //
+Nombre:
+Telefono:
+Apellidos:
+Tipos Actividades
+V
+Dirección:
+Estado: Activo Native
+o No
+Activo
+Cancelar Crear
+alerito
+ex
+ID
+Eliminar
+Cancelar Eliminar
+Busqueda
+ID
+Cancelar
+Buscar
+ID: 704478
+Edad: 23
+Nombre: Paco
+Telefono: 3223
+Apellidos: Pacal Tipos Actividades
+Dirección: Su casa
+Estado: Activo
+Volver
+Modificar
+Dirección:
+Tipos
+Teléfono:
+Estado Si No
+0
+Cancelar Modificar
+V
+V
+Coordinador
+<
+Gestión Brigadas
+Gestionar Inventario
+Gestión Voluntarios
++ Agregar
+回Eliminar
+Gestión Inventario
+Modificar
+Buscar
+Gestión Actividad
+Agregar
+Tipo:
+V
+Modificar
+Nombre:
+Nombre: Cemento
+Cantidad:
+Cantidad:
+Cancelar Agregar
+Cancelar Modificar
+Coordinador
+<
+Gestionar Inventario
+Gestión Brigadas
+Gestión Voluntarios
++ Agregar
+Eliminar
+Gestión Inventario
+Modificar
+☑ Buscar
+Gestión Actividad
+Agregar Actividad
+Nombre:
+Duración:
+Inicio:
+/
+Fin:
+Brigadas Aleatorio
+Categorías
+checkbox
+columnas dependen
+del tamaño final
+Manual
+ㅁ
+7
+date
