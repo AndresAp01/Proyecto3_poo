@@ -3,13 +3,11 @@ package vista;
 import logica.GestorActividades;
 import logica.GestorBrigadas;
 import logica.GestorInventario;
+import logica.GestorVoluntarios;
 import modelo.actividad.Actividad;
 import modelo.brigada.Brigada;
 import modelo.materiales.RecursoInventario;
-import modelo.usuarios.Usuario; // Asumiendo que Usuario.java está en modelo.usuarios
-import modelo.voluntarios.EstadoVoluntario;
-import modelo.voluntarios.Voluntario; // Asumiendo que Voluntario.java está en modelo.voluntarios
-import modelo.voluntarios.VoluntarioMedico; // Ejemplo de voluntario concreto
+import modelo.voluntarios.VoluntarioMedico;
 import util.MiExcepcion;
 
 import java.time.LocalDate;
@@ -18,66 +16,69 @@ import java.time.LocalDateTime;
 public class MainConsola {
 
     public static void main(String[] args) {
-        System.out.println("--- PRUEBAS DE CONSOLA DEL SISTEMA DE BRIGADAS ---");
+        System.out.println("--- PRUEBAS DE CONSOLA DEL SISTEMA DE BRIGADAS (EXTENDIDO) ---");
 
         GestorInventario gestorInventario = new GestorInventario();
         GestorBrigadas gestorBrigadas = new GestorBrigadas();
         GestorActividades gestorActividades = new GestorActividades();
-        // GestorUsuarios gestorUsuarios = new GestorUsuarios(); // Se deja comentado por simplicidad
-        // GestorVoluntarios gestorVoluntarios = new GestorVoluntarios(); // Se deja comentado por simplicidad
-
+        GestorVoluntarios gestorVoluntarios = new GestorVoluntarios();
 
         try {
             // --- PRUEBAS DE INVENTARIO ---
-            System.out.println("\n--- Gestión de Inventario ---");
+            System.out.println("\n--- 1. Gestión de Inventario ---");
             RecursoInventario suero = gestorInventario.agregarRecurso("Suero Fisiológico", 100, RecursoInventario.TipoRecurso.MEDICO);
             RecursoInventario martillo = gestorInventario.agregarRecurso("Martillo", 5, RecursoInventario.TipoRecurso.HERRAMIENTA);
-            RecursoInventario cemento = gestorInventario.agregarRecurso("Cemento 50kg", 20, RecursoInventario.TipoRecurso.MATERIAL_CONSTRUCCION);
 
-            System.out.println("Inventario actual: " + gestorInventario.obtenerTodoElInventario());
-            System.out.println("Buscando suero (ID " + suero.getId() + "): " + gestorInventario.buscarRecursoPorId(suero.getId()).getNombre());
+            System.out.println("-> Inventario inicial: " + gestorInventario.obtenerTodoElInventario());
 
-            // Consumir un recurso (el martillo)
-            RecursoInventario martilloEncontrado = gestorInventario.buscarRecursoPorId(martillo.getId());
-            if (martilloEncontrado != null && martilloEncontrado.consumirCantidad(2)) {
-                System.out.println("Se consumieron 2 martillos. Quedan: " + martilloEncontrado.getCantidadDisponible());
-            }
+            // Prueba de Eliminación
+            RecursoInventario temp = gestorInventario.agregarRecurso("Temporal", 1, RecursoInventario.TipoRecurso.OTRO);
+            System.out.println("-> Recurso temporal creado: " + temp.getNombre());
+            gestorInventario.eliminarRecurso(temp.getId());
+            System.out.println("-> Recurso temporal eliminado. ¿Existe aún? " + (gestorInventario.buscarRecursoPorId(temp.getId()) != null));
+
 
             // --- PRUEBAS DE BRIGADAS ---
-            System.out.println("\n--- Gestión de Brigadas ---");
+            System.out.println("\n--- 2. Gestión de Brigadas ---");
             Brigada brigadaSalud = gestorBrigadas.crearBrigada("salud", "Brigada Alpha", "Atención médica primaria", "General");
             Brigada brigadaInfra = gestorBrigadas.crearBrigada("infraestructura", "Brigada Beta", "Reparación de caminos", "Sector Este");
-            // Brigada brigadaSeg = gestorBrigadas.crearBrigada("seguridad", "Brigada Gamma", "Vigilancia", null); // Los parámetros se añadirían después para seguridad
+            System.out.println("-> Brigadas creadas: " + gestorBrigadas.obtenerTodasLasBrigadas().size());
 
-            System.out.println("Brigadas creadas: " + gestorBrigadas.obtenerTodasLasBrigadas());
 
             // --- PRUEBAS DE VOLUNTARIOS ---
-            System.out.println("\n--- Gestión de Voluntarios ---");
-            // Constructor correcto: ID, Nombre, Email, Telefono, Fecha, Especialidad
-            VoluntarioMedico medico1 = new VoluntarioMedico("111111111", "Dr. Smith", "dr.smith@test.com", "8888-8888", LocalDate.now(), "Cardiología");
+            System.out.println("\n--- 3. Gestión de Voluntarios ---");
+            VoluntarioMedico medico1 = new VoluntarioMedico("111111111", "Dr. Smith", "smith@hospital.com", "8888-8888", LocalDate.now(), "Cardiología");
 
-            // Aquí deberíamos registrar al voluntario en un GestorVoluntarios si lo hubiéramos instanciado
-            // gestorVoluntarios.registrarVoluntario(medico1);
+            // Registro en el Gestor
+            gestorVoluntarios.registrarVoluntario(medico1);
+            System.out.println("-> Voluntario registrado: " + gestorVoluntarios.buscarVoluntarioPorId("111111111").getNombre());
 
+            // Listado de Disponibles
+            System.out.println("-> Voluntarios disponibles: " + gestorVoluntarios.listarVoluntariosDisponibles().size());
+
+            // Asignación a Brigada
             gestorBrigadas.agregarVoluntarioABrigada(brigadaSalud.getId(), medico1);
-            System.out.println("Voluntarios en Brigada Alpha: " + brigadaSalud.consultarVoluntarios());
+            System.out.println("-> Voluntarios en Brigada Alpha tras asignación: " + brigadaSalud.consultarVoluntarios());
+
 
             // --- PRUEBAS DE ACTIVIDADES ---
-            System.out.println("\n--- Gestión de Actividades ---");
-            Actividad campanaSalud = gestorActividades.crearActividad("Campaña de vacunación", LocalDateTime.now().plusDays(7), "Centro Comunal");
-            gestorActividades.asignarRecursoAActividad(campanaSalud.getId(), suero, 50);
-            System.out.println("Actividad creada: " + campanaSalud.getObjetivo());
-            System.out.println("Recursos asignados a campaña de salud: " + campanaSalud.getRecursosAsignados());
+            System.out.println("\n--- 4. Gestión de Actividades ---");
+            Actividad campana = gestorActividades.crearActividad("Vacunación Masiva", LocalDateTime.now().plusDays(7), "Plaza Central");
+            gestorActividades.asignarRecursoAActividad(campana.getId(), suero, 50);
+            System.out.println("-> Actividad creada: " + campana.getObjetivo() + " | Recursos: " + campana.getRecursosAsignados());
 
-            // --- EJECUCIÓN DE PLAN DE ACCIÓN DE BRIGADA ---
-            System.out.println("\n--- Ejecución de Planes de Acción ---");
+
+            // --- EJECUCIÓN ---
+            System.out.println("\n--- 5. Ejecución de Planes ---");
             brigadaSalud.ejecutarPlanDeAccion();
             brigadaInfra.ejecutarPlanDeAccion();
 
+            System.out.println("\n--- PRUEBA FINALIZADA CON ÉXITO ---");
+
         } catch (MiExcepcion e) {
-            System.err.println("Error en la aplicación: " + e.getMessage());
+            System.err.println("ERROR CONTROLADO: " + e.getMessage());
         } catch (Exception e) {
-            System.err.println("Error inesperado: " + e.getMessage());
+            System.err.println("ERROR INESPERADO: " + e.getMessage());
             e.printStackTrace();
         }
     }
