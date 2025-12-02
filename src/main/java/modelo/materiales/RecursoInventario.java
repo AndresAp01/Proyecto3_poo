@@ -3,6 +3,7 @@ package modelo.materiales;
 import java.io.Serializable;
 
 public class RecursoInventario implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private int id;
     private String nombre;

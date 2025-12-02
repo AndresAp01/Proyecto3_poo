@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BrigadaDeInfraestructura extends Brigada {
+    private static final long serialVersionUID = 1L;
 
     private String areaAsignada;
     private List<RecursoInventario> inventarioHerramientas;

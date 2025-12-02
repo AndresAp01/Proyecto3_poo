@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BrigadaDeSalud extends Brigada {
+    private static final long serialVersionUID = 1L;
 
     private String tipoAtencion;
     private List<RecursoInventario> inventarioMedico; 

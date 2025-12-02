@@ -3,6 +3,8 @@ package modelo.usuarios;
 import java.io.Serializable;
 
 public abstract class Usuario implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     protected String id;           // podría ser cédula o código interno
     protected String nombre;
     protected String email;
