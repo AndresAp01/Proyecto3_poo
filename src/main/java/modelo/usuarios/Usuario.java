@@ -1,6 +1,8 @@
 package modelo.usuarios;
 
-public abstract class Usuario {
+import java.io.Serializable;
+
+public abstract class Usuario implements Serializable {
     protected String id;           // podría ser cédula o código interno
     protected String nombre;
     protected String email;

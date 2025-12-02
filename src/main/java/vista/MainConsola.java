@@ -9,6 +9,7 @@ import modelo.brigada.Brigada;
 import modelo.materiales.RecursoInventario;
 import modelo.voluntarios.VoluntarioMedico;
 import util.MiExcepcion;
+import util.GestorArchivos;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -19,9 +20,17 @@ public class MainConsola {
         System.out.println("--- PRUEBAS DE CONSOLA DEL SISTEMA DE BRIGADAS (EXTENDIDO) ---");
 
         GestorInventario gestorInventario = new GestorInventario();
-        GestorBrigadas gestorBrigadas = new GestorBrigadas();
+        GestorBrigadas gestorBrigadas;
         GestorActividades gestorActividades = new GestorActividades();
         GestorVoluntarios gestorVoluntarios = new GestorVoluntarios();
+
+        try {
+            gestorBrigadas = GestorArchivos.cargarObjeto("brigadas.dat", GestorBrigadas.class);
+            System.out.println("carga exitosa");
+        } catch (MiExcepcion e) {
+            System.err.println("No se pudo cargar GestorBrigadas, se creará uno nuevo: " + e.getMessage());
+            gestorBrigadas = new GestorBrigadas();
+        }
 
         try {
             // --- PRUEBAS DE INVENTARIO ---
@@ -74,6 +83,14 @@ public class MainConsola {
             brigadaInfra.ejecutarPlanDeAccion();
 
             System.out.println("\n--- PRUEBA FINALIZADA CON ÉXITO ---");
+
+            try {
+                GestorArchivos.guardarObjeto("brigadas.dat", gestorBrigadas);
+            } catch (MiExcepcion e) {
+                System.err.println(e.getMessage());
+            }
+
+
 
         } catch (MiExcepcion e) {
             System.err.println("ERROR CONTROLADO: " + e.getMessage());

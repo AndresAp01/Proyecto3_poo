@@ -2,11 +2,12 @@ package modelo.actividad;
 
 import modelo.materiales.RecursoInventario;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Actividad {
+public class Actividad implements Serializable {
 
     private int id;
     private String objetivo;

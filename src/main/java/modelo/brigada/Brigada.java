@@ -2,10 +2,11 @@ package modelo.brigada;
 
 import modelo.voluntarios.Voluntario;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Brigada {
+public abstract class Brigada implements Serializable {
 
     protected int id;
     protected String nombre;

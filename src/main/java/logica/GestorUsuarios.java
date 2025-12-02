@@ -1,13 +1,15 @@
 package logica;
 
 import modelo.usuarios.Usuario;
+import util.GestorArchivos;
 import util.MiExcepcion;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class GestorUsuarios {
+public class GestorUsuarios implements Serializable {
 
     private List<Usuario> listaUsuarios;
 

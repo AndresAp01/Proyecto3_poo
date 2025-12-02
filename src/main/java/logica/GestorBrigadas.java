@@ -5,14 +5,16 @@ import modelo.brigada.BrigadaDeInfraestructura;
 import modelo.brigada.BrigadaDeSalud;
 import modelo.brigada.BrigadaDeSeguridad;
 import modelo.voluntarios.Voluntario;
+import util.GestorArchivos;
 import util.MiExcepcion;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class GestorBrigadas {
+public class GestorBrigadas implements Serializable {
 
     private List<Brigada> listaBrigadas;
     private int contadorIds;

@@ -1,6 +1,8 @@
 package modelo.materiales;
 
-public class RecursoInventario {
+import java.io.Serializable;
+
+public class RecursoInventario implements Serializable {
 
     private int id;
     private String nombre;

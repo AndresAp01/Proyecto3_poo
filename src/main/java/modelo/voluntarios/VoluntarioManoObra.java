@@ -19,4 +19,8 @@ public class VoluntarioManoObra extends Voluntario {
         // Ejemplo de regla: solo participa si la brigada es de tipo Infraestructura
         return brigada.getClass().getSimpleName().equals("BrigadaDeInfraestructura");
     }
+
+    public String getTipoDeObra() {
+        return tipoDeObra;
+    }
 }

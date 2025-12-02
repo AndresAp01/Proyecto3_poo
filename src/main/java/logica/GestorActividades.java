@@ -2,14 +2,16 @@ package logica;
 
 import modelo.actividad.Actividad;
 import modelo.materiales.RecursoInventario;
+import util.GestorArchivos;
 import util.MiExcepcion;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GestorActividades {
+public class GestorActividades implements Serializable {
 
     private List<Actividad> listaActividades;
     private int contadorIds;

@@ -19,4 +19,8 @@ public class VoluntarioSeguridad extends Voluntario {
         // Ejemplo de regla: solo participa si la brigada es de tipo SEGURIDAD
         return brigada.getClass().getSimpleName().equals("BrigadaDeSeguridad");
     }
+
+    public String getTipoSeguridad() {
+        return tipoSeguridad;
+    }
 }

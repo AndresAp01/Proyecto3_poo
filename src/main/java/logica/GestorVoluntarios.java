@@ -2,13 +2,15 @@ package logica;
 
 import modelo.voluntarios.Voluntario;
 import modelo.voluntarios.Disponibilidad; // Importación añadida
+import util.GestorArchivos;
 import util.MiExcepcion;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GestorVoluntarios {
+public class GestorVoluntarios implements Serializable {
 
     private List<Voluntario> listaVoluntarios;
 

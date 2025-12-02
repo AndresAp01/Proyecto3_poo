@@ -1,13 +1,15 @@
 package logica;
 
 import modelo.materiales.RecursoInventario;
+import util.GestorArchivos;
 import util.MiExcepcion;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class GestorInventario {
+public class GestorInventario implements Serializable {
 
     private List<RecursoInventario> inventario;
     private int contadorIds;

@@ -21,4 +21,8 @@ public class VoluntarioMedico extends Voluntario {
         // Ejemplo de regla: solo participa si la brigada es de tipo SALUD
         return brigada.getClass().getSimpleName().equals("BrigadaDeSalud");
     }
+
+    public String getEspecialidadMedica() {
+        return especialidadMedica;
+    }
 }
