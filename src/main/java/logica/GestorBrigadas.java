@@ -1,5 +1,6 @@
 package logica;
 
+import modelo.actividad.Actividad;
 import modelo.brigada.Brigada;
 import modelo.brigada.BrigadaDeInfraestructura;
 import modelo.brigada.BrigadaDeSalud;
@@ -101,6 +102,18 @@ public class GestorBrigadas implements Serializable {
         brigada.agregarVoluntario(voluntario);
         guardarDatos();
         // Aquí se debería actualizar el estado del voluntario si es necesario (e.g., OCUPADO)
+    }
+
+    public void asignarActividadABrigada(int idBrigada, Actividad actividad) throws MiExcepcion {
+        Brigada brigada = buscarBrigadaPorId(idBrigada);
+        if (brigada == null) {
+            throw new MiExcepcion("Brigada no encontrada.");
+        }
+        if (actividad == null) {
+            throw new MiExcepcion("Actividad Invalida");
+        }
+        brigada.asignarActividad(actividad);
+        guardarDatos();
     }
 
     public void removerVoluntarioDeBrigada(int idBrigada, Voluntario voluntario) throws MiExcepcion {

@@ -1,5 +1,6 @@
 package modelo.brigada;
 
+import modelo.actividad.Actividad;
 import modelo.materiales.RecursoInventario;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,12 @@ public class BrigadaDeInfraestructura extends Brigada {
 
     @Override
     public void ejecutarPlanDeAccion() {
+        if (listaActividades.isEmpty()) {
+            System.out.println("Sin actividades por realizar");
+        }
         System.out.println("Iniciando obras de infraestructura en área: " + areaAsignada);
+        Actividad ultima = listaActividades.getLast();
+        ultima.setEstado(Actividad.EstadoActividad.EN_PROGRESO);
         this.estado = EstadoBrigada.ACTIVA;
     }
 

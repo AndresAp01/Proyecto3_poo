@@ -1,5 +1,6 @@
 package modelo.brigada;
 
+import modelo.actividad.Actividad;
 import modelo.voluntarios.Voluntario;
 
 import java.io.Serializable;
@@ -14,6 +15,7 @@ public abstract class Brigada implements Serializable {
     protected String objetivoGeneral;
     protected EstadoBrigada estado;
     protected List<Voluntario> listaVoluntarios;
+    protected List<Actividad> listaActividades;
     public Brigada(int id, String nombre, String objetivoGeneral) {
         this.id = id;
         this.nombre = nombre;
@@ -28,12 +30,22 @@ public abstract class Brigada implements Serializable {
         }
     }
 
+    public void asignarActividad(Actividad actividad) {
+        if (actividad != null && !listaActividades.contains(actividad)) {
+            listaActividades.add(actividad);
+        }
+    }
+
     public void removerVoluntario(Voluntario voluntario) {
         listaVoluntarios.remove(voluntario);
     }
 
     public List<Voluntario> consultarVoluntarios() {
         return new ArrayList<>(listaVoluntarios);
+    }
+
+    public List<Actividad> consultarActividades() {
+        return new ArrayList<>(listaActividades);
     }
 
     // Método polimórfico principal

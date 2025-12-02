@@ -1,5 +1,7 @@
 package modelo.brigada;
 
+import modelo.actividad.Actividad;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +23,12 @@ public class BrigadaDeSeguridad extends Brigada {
 
     @Override
     public void ejecutarPlanDeAccion() {
+        if (listaActividades.isEmpty()) {
+            System.out.println("Sin actividades por realizar");
+        }
         System.out.println("Desplegando seguridad en zonas: " + zonasDeVigilancia);
-        // Lógica específica: rondas, control de perímetros
+        Actividad ultima = listaActividades.getLast();
+        ultima.setEstado(Actividad.EstadoActividad.EN_PROGRESO);
         this.estado = EstadoBrigada.ACTIVA;
     }
 
