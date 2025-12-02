@@ -51,7 +51,7 @@ public class GestorUsuarios implements Serializable {
         return new ArrayList<>(listaUsuarios);
     }
 
-    private void guardarDatos() {
+    public void guardarDatos() {
         try {
             GestorArchivos.guardarObjeto(ARCHIVO_USUARIOS, (ArrayList<Usuario>) listaUsuarios);
         } catch (MiExcepcion e) {
@@ -59,7 +59,7 @@ public class GestorUsuarios implements Serializable {
         }
     }
 
-    private void cargarDatos() {
+    public void cargarDatos() {
         try {
             ArrayList<Usuario> datosCargados = GestorArchivos.cargarObjeto(ARCHIVO_USUARIOS, ArrayList.class);
             if (datosCargados != null) {

@@ -95,6 +95,9 @@ public class GestorBrigadas implements Serializable {
         if (voluntario == null) {
             throw new MiExcepcion("Voluntario inválido.");
         }
+        if (!voluntario.puedeParticipar(brigada)) {
+            throw new MiExcepcion("Voluntario inválido.");
+        }
         brigada.agregarVoluntario(voluntario);
         guardarDatos();
         // Aquí se debería actualizar el estado del voluntario si es necesario (e.g., OCUPADO)
@@ -123,7 +126,7 @@ public class GestorBrigadas implements Serializable {
                 .collect(Collectors.toList());
     }
 
-    private void guardarDatos() {
+    public void guardarDatos() {
         try {
             GestorArchivos.guardarObjeto(ARCHIVO_BRIGADAS, new BrigadasData(listaBrigadas, contadorIds));
         } catch (MiExcepcion e) {
@@ -131,7 +134,7 @@ public class GestorBrigadas implements Serializable {
         }
     }
 
-    private void cargarDatos() {
+    public void cargarDatos() {
         try {
             BrigadasData datosCargados = GestorArchivos.cargarObjeto(ARCHIVO_BRIGADAS, BrigadasData.class);
             if (datosCargados != null) {

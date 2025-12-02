@@ -56,7 +56,7 @@ public class GestorInventario implements Serializable {
         return new ArrayList<>(inventario);
     }
 
-    private void guardarDatos() {
+    public void guardarDatos() {
         try {
             // Guardar tanto la lista como el contador de IDs
             GestorArchivos.guardarObjeto(ARCHIVO_INVENTARIO, new InventarioData(inventario, contadorIds));
@@ -65,7 +65,7 @@ public class GestorInventario implements Serializable {
         }
     }
 
-    private void cargarDatos() {
+    public void cargarDatos() {
         try {
             InventarioData datosCargados = GestorArchivos.cargarObjeto(ARCHIVO_INVENTARIO, InventarioData.class);
             if (datosCargados != null) {

@@ -58,7 +58,7 @@ public class GestorVoluntarios implements Serializable {
         guardarDatos();
     }
 
-    private void guardarDatos() {
+    public void guardarDatos() {
         try {
             GestorArchivos.guardarObjeto(ARCHIVO_VOLUNTARIOS, (ArrayList<Voluntario>) listaVoluntarios);
         } catch (MiExcepcion e) {
@@ -66,7 +66,7 @@ public class GestorVoluntarios implements Serializable {
         }
     }
 
-    private void cargarDatos() {
+    public void cargarDatos() {
         try {
             ArrayList<Voluntario> datosCargados = GestorArchivos.cargarObjeto(ARCHIVO_VOLUNTARIOS, ArrayList.class);
             if (datosCargados != null) {

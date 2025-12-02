@@ -70,7 +70,7 @@ public class GestorActividades implements Serializable {
         return new ArrayList<>(listaActividades);
     }
 
-    private void guardarDatos() {
+    public void guardarDatos() {
         try {
             GestorArchivos.guardarObjeto(ARCHIVO_ACTIVIDADES, new ActividadesData(listaActividades, contadorIds));
         } catch (MiExcepcion e) {
@@ -78,7 +78,7 @@ public class GestorActividades implements Serializable {
         }
     }
 
-    private void cargarDatos() {
+    public void cargarDatos() {
         try {
             ActividadesData datosCargados = GestorArchivos.cargarObjeto(ARCHIVO_ACTIVIDADES, ActividadesData.class);
             if (datosCargados != null) {
