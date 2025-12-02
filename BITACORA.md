@@ -18,34 +18,17 @@ herencia y polimorfismo como conceptos centrales.
 
 #### 1. Clase Abstracta: `Brigada`
 
-Se definirá una clase base abstracta que contendrá los atributos y comportamientos comunes a todas las brigadas.
-
-- **Atributos comunes:**
-    - `nombre`: String
-    - `objetivoGeneral`: String
-    - `estado`: Enum (Ej: PENDIENTE, ACTIVA, FINALIZADA)
-    - `listaVoluntarios`: `ArrayList<Voluntario>`
-- **Métodos comunes:**
-    - `agregarVoluntario(Voluntario v)`
-    - `removerVoluntario(Voluntario v)`
-    - `consultarVoluntarios()`
-- **Método Abstracto:**
-    - `ejecutarPlanDeAccion()`: Este método deberá ser implementado por cada tipo de brigada, permitiendo un
-      comportamiento polimórfico.
+Se definió una clase base abstracta que contiene los atributos y comportamientos comunes a todas las brigadas,
+incluyendo la gestión de voluntarios y un método abstracto para su plan de acción.
 
 #### 2. Clases Hijas (Especializadas)
 
-Se crearán clases concretas que hereden de `Brigada` para representar los diferentes tipos de equipos.
+Se crearon clases concretas que heredan de `Brigada` para representar los diferentes tipos de equipos, cada una con
+atributos y lógica específica para la implementación de su plan de acción:
 
-- **`BrigadaDeSalud`**
-    - **Atributos propios:** `tipoAtencion` (String), `inventarioMedico` (`ArrayList<Medicamento>`)
-    - **Implementación de `ejecutarPlanDeAccion()`:** Lógica específica para atención médica.
-- **`BrigadaDeInfraestructura`**
-    - **Atributos propios:** `areaAsignada` (String), `inventarioHerramientas` (`ArrayList<Herramienta>`)
-    - **Implementación de `ejecutarPlanDeAccion()`:** Lógica para la reparación o construcción.
-- **`BrigadaDeSeguridad`**
-    - **Atributos propios:** `zonasDeVigilancia` (`ArrayList<String>`)
-    - **Implementación de `ejecutarPlanDeAccion()`:** Lógica para realizar rondas o monitorizar áreas.
+- **`BrigadaDeSalud`**: Atributos relacionados con la atención médica y gestión de inventario médico.
+- **`BrigadaDeInfraestructura`**: Atributos para el manejo de áreas asignadas y herramientas.
+- **`BrigadaDeSeguridad`**: Atributos para definir y gestionar zonas de vigilancia.
 
 ### Beneficios de este Enfoque
 
@@ -96,19 +79,16 @@ Se definió la estructura bajo `src/main/java`:
 
 #### 2. Clases Implementadas
 
-- **`modelo.Usuario`**: Clase abstracta padre con atributos comunes (nombre, cédula, teléfono, dirección).
-- **`modelo.voluntarios.Voluntario`**: Clase abstracta que hereda de `Usuario`, añadiendo `estado` (Enum) y
-  `fechaIngreso`.
-- **`modelo.brigada.Brigada`**: Clase abstracta con `id`, `nombre`, `objetivo`, `estado` y lista de voluntarios.
-- **Subclases de Brigada**:
-    - `BrigadaDeSalud`: Añade `tipoAtencion` e inventario médico.
-    - `BrigadaDeInfraestructura`: Añade `areaAsignada` e inventario de herramientas.
-    - `BrigadaDeSeguridad`: Añade lista de `zonasDeVigilancia`.
+- **`modelo.Usuario`**: Clase abstracta padre que representa la información base de cualquier usuario.
+- **`modelo.voluntarios.Voluntario`**: Clase abstracta que hereda de `Usuario`, añadiendo detalles de disponibilidad y
+  fecha de ingreso.
+- **`modelo.brigada.Brigada`**: Clase abstracta base para todas las brigadas.
+- **Subclases de Brigada**: `BrigadaDeSalud`, `BrigadaDeInfraestructura`, `BrigadaDeSeguridad`, cada una con sus
+  especializaciones y atributos correspondientes.
 
 #### 3. Actualización de Documentación
 
-- Se actualizó `UML.md` para reflejar fielmente la jerarquía implementada de brigadas (`BrigadaDeSalud`,
-  `BrigadaDeInfraestructura`, `BrigadaDeSeguridad`) y sus atributos específicos.
+- Se actualizó `UML.md` para reflejar fielmente la jerarquía implementada de brigadas y sus atributos específicos.
 
 ### Pendientes Inmediatos
 
@@ -140,8 +120,8 @@ Se ha progresado en la implementación de componentes esenciales del modelo:
 
 #### 3. Manejo de Errores
 
-- Se creó la clase `util.AppException`, una excepción personalizada que hereda de `Exception`, permitiendo un manejo de
-  errores más específico y centralizado.
+- Se creó la clase `util.MiExcepcion` (anteriormente `AppException`), una excepción personalizada que hereda de
+  `Exception`, permitiendo un manejo de errores más específico y centralizado.
 
 ### Próximos Pasos
 
