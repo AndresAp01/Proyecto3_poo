@@ -1,7 +1,7 @@
 package logica;
 
 import modelo.voluntarios.Voluntario;
-import modelo.voluntarios.EstadoVoluntario;
+import modelo.voluntarios.Disponibilidad; // Importación añadida
 import util.MiExcepcion;
 
 import java.util.ArrayList;
@@ -20,23 +20,22 @@ public class GestorVoluntarios {
         if (voluntario == null) {
             throw new MiExcepcion("El voluntario no puede ser nulo.");
         }
-        // Verificamos si ya existe (usando cédula, que hereda de Usuario)
-        if (buscarVoluntarioPorCedula(voluntario.getCedula()) != null) {
-            throw new MiExcepcion("Ya existe un voluntario con la cédula: " + voluntario.getCedula());
+        if (buscarVoluntarioPorId(voluntario.getId()) != null) {
+            throw new MiExcepcion("Ya existe un voluntario con el ID: " + voluntario.getId());
         }
         listaVoluntarios.add(voluntario);
     }
 
-    public Voluntario buscarVoluntarioPorCedula(String cedula) {
+    public Voluntario buscarVoluntarioPorId(String id) {
         return listaVoluntarios.stream()
-                .filter(v -> v.getCedula().equals(cedula))
+                .filter(v -> v.getId().equals(id))
                 .findFirst()
                 .orElse(null);
     }
 
     public List<Voluntario> listarVoluntariosDisponibles() {
         return listaVoluntarios.stream()
-                .filter(v -> v.getEstado() == EstadoVoluntario.DISPONIBLE) // Asumiendo que EstadoVoluntario.DISPONIBLE existe
+                .filter(v -> v.getDisponibilidad() == Disponibilidad.DISPONIBLE) // Corrección aquí
                 .collect(Collectors.toList());
     }
 
@@ -44,8 +43,8 @@ public class GestorVoluntarios {
         return new ArrayList<>(listaVoluntarios);
     }
 
-    public void eliminarVoluntario(String cedula) throws MiExcepcion {
-        Voluntario v = buscarVoluntarioPorCedula(cedula);
+    public void eliminarVoluntario(String id) throws MiExcepcion {
+        Voluntario v = buscarVoluntarioPorId(id);
         if (v == null) {
             throw new MiExcepcion("Voluntario no encontrado.");
         }

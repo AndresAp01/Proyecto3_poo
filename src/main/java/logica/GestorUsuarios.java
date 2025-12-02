@@ -19,23 +19,23 @@ public class GestorUsuarios {
         if (usuario == null) {
             throw new MiExcepcion("El usuario no puede ser nulo.");
         }
-        if (buscarUsuarioPorCedula(usuario.getCedula()) != null) {
-            throw new MiExcepcion("Ya existe un usuario registrado con la cédula: " + usuario.getCedula());
+        if (buscarUsuarioPorId(usuario.getId()) != null) {
+            throw new MiExcepcion("Ya existe un usuario registrado con el ID: " + usuario.getId());
         }
         listaUsuarios.add(usuario);
     }
 
-    public Usuario buscarUsuarioPorCedula(String cedula) {
+    public Usuario buscarUsuarioPorId(String id) {
         return listaUsuarios.stream()
-                .filter(u -> u.getCedula().equals(cedula))
+                .filter(u -> u.getId().equals(id))
                 .findFirst()
                 .orElse(null);
     }
 
-    public void eliminarUsuario(String cedula) throws MiExcepcion {
-        Usuario usuario = buscarUsuarioPorCedula(cedula);
+    public void eliminarUsuario(String id) throws MiExcepcion {
+        Usuario usuario = buscarUsuarioPorId(id);
         if (usuario == null) {
-            throw new MiExcepcion("Usuario no encontrado con cédula: " + cedula);
+            throw new MiExcepcion("Usuario no encontrado con ID: " + id);
         }
         listaUsuarios.remove(usuario);
     }

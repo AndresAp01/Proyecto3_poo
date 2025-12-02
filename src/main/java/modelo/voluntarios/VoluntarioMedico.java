@@ -2,6 +2,8 @@ package modelo.voluntarios;
 
 import modelo.brigada.Brigada;
 
+import java.time.LocalDate;
+
 public class VoluntarioMedico extends Voluntario {
     private String especialidadMedica; // p.ej. "Pediatría", "General"
 
@@ -9,7 +11,7 @@ public class VoluntarioMedico extends Voluntario {
                             String nombreCompleto,
                             String email,
                             String telefono,
-                            String especialidadMedica) {
+                            LocalDate now, String especialidadMedica) {
         super(id, nombreCompleto, email, telefono);
         this.especialidadMedica = especialidadMedica;
     }
