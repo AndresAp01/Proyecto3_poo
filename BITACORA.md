@@ -56,3 +56,25 @@ Se crearán clases concretas que hereden de `Brigada` para representar los difer
   `Medicamento`, permitiendo una gestión de inventario genérica.
 - **Justificación para Archivos y Excepciones:** Se necesitarán archivos para persistir el estado del sistema y
   excepciones para manejar situaciones como voluntarios no disponibles o recursos inexistentes.
+
+## 2025-12-01: Confirmación de Diseño y Plan de Implementación
+
+### Decisión de Diseño (Modelo de Clases)
+
+Se ha consolidado la arquitectura del sistema fusionando la propuesta de la bitácora con la estructura de voluntarios
+del UML original.
+
+1. **Jerarquía de Brigadas:** Se implementará `Brigada` como clase abstracta con `BrigadaDeSalud`,
+   `BrigadaDeInfraestructura` y `BrigadaDeSeguridad` como hijas concretas. Esto permite polimorfismo en el método
+   `ejecutarPlanDeAccion()`.
+2. **Jerarquía de Voluntarios:** Se mantendrá `Voluntario` como clase abstracta (heredando de `Usuario`) con subclases
+   especializadas (`VoluntarioMedico`, `VoluntarioManoObra`, etc.).
+3. **Interacción:** `Brigada` tendrá una lista polimórfica `ArrayList<Voluntario>`, permitiendo asignar cualquier tipo
+   de voluntario a cualquier brigada, aunque se podrán implementar validaciones lógicas (ej. solo médicos en brigadas de
+   salud) si es necesario.
+
+### Próximos Pasos
+
+- Crear estructura de paquetes (Modelo, Vista, Controlador/Negocio).
+- Implementar clases base abstractas (`Brigada`, `Voluntario`, `Usuario`).
+- Implementar clases hijas y lógica de negocio.
