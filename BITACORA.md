@@ -3,7 +3,7 @@
 Este documento servirá como un diario para registrar las decisiones, cambios y propuestas de diseño a lo largo del
 desarrollo del proyecto.
 
-## 2025-11-29: Propuesta de Rediseño Inicial
+## Propuesta de Rediseño Inicial
 
 ### Problema a Resolver
 
@@ -40,7 +40,7 @@ atributos y lógica específica para la implementación de su plan de acción:
 - **Justificación para Archivos y Excepciones:** Se necesitarán archivos para persistir el estado del sistema y
   excepciones para manejar situaciones como voluntarios no disponibles o recursos inexistentes.
 
-## 2025-12-01: Confirmación de Diseño y Plan de Implementación
+## Confirmación de Diseño y Plan de Implementación
 
 ### Decisión de Diseño (Modelo de Clases)
 
@@ -62,7 +62,7 @@ del UML original.
 - Implementar clases base abstractas (`Brigada`, `Voluntario`, `Usuario`).
 - Implementar clases hijas y lógica de negocio.
 
-## 2025-12-01: Implementación Inicial del Modelo
+## Implementación Inicial del Modelo
 
 ### Avances Realizados
 
@@ -97,7 +97,7 @@ Se definió la estructura bajo `src/main/java`:
 - Implementar las subclases concretas de `Voluntario`.
 - Crear el modelo de `Actividad`.
 
-## 2025-12-01: Desarrollo de Componentes Clave (Inventario, Actividades, Errores)
+## Desarrollo de Componentes Clave (Inventario, Actividades, Errores)
 
 ### Avances Realizados
 
@@ -130,3 +130,39 @@ Se ha progresado en la implementación de componentes esenciales del modelo:
 - Implementar las subclases concretas de `Voluntario`.
 - Desarrollar los Gestores (por ejemplo, `GestorBrigadas`) para empezar a integrar la lógica de negocio y la interacción
   entre los modelos.
+
+## Implementación de la Lógica de Negocio (Gestores)
+
+### Avances Realizados
+
+Se ha completado la capa lógica con la creación de clases gestoras que centralizan las operaciones del sistema:
+
+#### 1. `GestorInventario`
+
+- Encargado de la gestión del inventario general.
+- Permite agregar recursos, buscar por ID y eliminarlos, aplicando validaciones básicas.
+
+#### 2. `GestorActividades`
+
+- Administra el ciclo de vida de las actividades.
+- Incluye funcionalidad para crear actividades y asignarles recursos del inventario, vinculando así el modelo de
+  materiales con el operativo.
+
+#### 3. `GestorBrigadas`
+
+- Gestiona la creación polimórfica de brigadas (Salud, Infraestructura, Seguridad) mediante un patrón Factory simple.
+- Maneja la asignación y remoción de voluntarios en las brigadas.
+
+#### 4. `GestorUsuarios` y `GestorVoluntarios`
+
+- `GestorUsuarios`: Administra usuarios a nivel general (registro, búsqueda, eliminación).
+- `GestorVoluntarios`: Especializado en la lógica de voluntarios, permitiendo filtrar por disponibilidad y validar
+  duplicados.
+
+### Estado Actual
+
+El proyecto cuenta ahora con una arquitectura MVC completa en su backend:
+
+- **Modelo:** Entidades definidas y jerarquías establecidas.
+- **Controlador (Lógica):** Gestores implementados para orquestar las operaciones.
+- **Vista:** Pendiente de implementación (actualmente solo existe el esqueleto `Main.java`).
