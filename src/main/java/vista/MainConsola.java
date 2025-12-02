@@ -9,94 +9,87 @@ import modelo.brigada.Brigada;
 import modelo.materiales.RecursoInventario;
 import modelo.voluntarios.VoluntarioMedico;
 import util.MiExcepcion;
-import util.GestorArchivos;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class MainConsola {
 
     public static void main(String[] args) {
-        System.out.println("--- PRUEBAS DE CONSOLA DEL SISTEMA DE BRIGADAS (EXTENDIDO) ---");
+        System.out.println("=== INICIO DEL SISTEMA (MODO PRUEBA PERSISTENCIA) ===");
 
+        // 1. Instanciar Gestores (Esto cargará los datos automáticamente)
         GestorInventario gestorInventario = new GestorInventario();
-        GestorBrigadas gestorBrigadas;
+        GestorBrigadas gestorBrigadas = new GestorBrigadas();
         GestorActividades gestorActividades = new GestorActividades();
         GestorVoluntarios gestorVoluntarios = new GestorVoluntarios();
 
-        try {
-            gestorBrigadas = GestorArchivos.cargarObjeto("brigadas.dat", GestorBrigadas.class);
-            System.out.println("carga exitosa");
-        } catch (MiExcepcion e) {
-            System.err.println("No se pudo cargar GestorBrigadas, se creará uno nuevo: " + e.getMessage());
-            gestorBrigadas = new GestorBrigadas();
-        }
+        // 2. Mostrar estado inicial
+        System.out.println("\n--- ESTADO ACTUAL ---");
+        System.out.println("Inventario: " + gestorInventario.obtenerTodoElInventario().size() + " items.");
+        System.out.println("Brigadas:   " + gestorBrigadas.obtenerTodasLasBrigadas().size() + " brigadas.");
+        System.out.println("Voluntarios:" + gestorVoluntarios.obtenerTodos().size() + " voluntarios.");
+        System.out.println("Actividades:" + gestorActividades.obtenerTodas().size() + " actividades.");
 
         try {
-            // --- PRUEBAS DE INVENTARIO ---
-            System.out.println("\n--- 1. Gestión de Inventario ---");
-            RecursoInventario suero = gestorInventario.agregarRecurso("Suero Fisiológico", 100, RecursoInventario.TipoRecurso.MEDICO);
-            RecursoInventario martillo = gestorInventario.agregarRecurso("Martillo", 5, RecursoInventario.TipoRecurso.HERRAMIENTA);
-
-            System.out.println("-> Inventario inicial: " + gestorInventario.obtenerTodoElInventario());
-
-            // Prueba de Eliminación
-            RecursoInventario temp = gestorInventario.agregarRecurso("Temporal", 1, RecursoInventario.TipoRecurso.OTRO);
-            System.out.println("-> Recurso temporal creado: " + temp.getNombre());
-            gestorInventario.eliminarRecurso(temp.getId());
-            System.out.println("-> Recurso temporal eliminado. ¿Existe aún? " + (gestorInventario.buscarRecursoPorId(temp.getId()) != null));
-
-
-            // --- PRUEBAS DE BRIGADAS ---
-            System.out.println("\n--- 2. Gestión de Brigadas ---");
-            Brigada brigadaSalud = gestorBrigadas.crearBrigada("salud", "Brigada Alpha", "Atención médica primaria", "General");
-            Brigada brigadaInfra = gestorBrigadas.crearBrigada("infraestructura", "Brigada Beta", "Reparación de caminos", "Sector Este");
-            System.out.println("-> Brigadas creadas: " + gestorBrigadas.obtenerTodasLasBrigadas().size());
-
-
-            // --- PRUEBAS DE VOLUNTARIOS ---
-            System.out.println("\n--- 3. Gestión de Voluntarios ---");
-            VoluntarioMedico medico1 = new VoluntarioMedico("111111111", "Dr. Smith", "smith@hospital.com", "8888-8888", LocalDate.now(), "Cardiología");
-
-            // Registro en el Gestor
-            gestorVoluntarios.registrarVoluntario(medico1);
-            System.out.println("-> Voluntario registrado: " + gestorVoluntarios.buscarVoluntarioPorId("111111111").getNombre());
-
-            // Listado de Disponibles
-            System.out.println("-> Voluntarios disponibles: " + gestorVoluntarios.listarVoluntariosDisponibles().size());
-
-            // Asignación a Brigada
-            gestorBrigadas.agregarVoluntarioABrigada(brigadaSalud.getId(), medico1);
-            System.out.println("-> Voluntarios en Brigada Alpha tras asignación: " + brigadaSalud.consultarVoluntarios());
-
-
-            // --- PRUEBAS DE ACTIVIDADES ---
-            System.out.println("\n--- 4. Gestión de Actividades ---");
-            Actividad campana = gestorActividades.crearActividad("Vacunación Masiva", LocalDateTime.now().plusDays(7), "Plaza Central");
-            gestorActividades.asignarRecursoAActividad(campana.getId(), suero, 50);
-            System.out.println("-> Actividad creada: " + campana.getObjetivo() + " | Recursos: " + campana.getRecursosAsignados());
-
-
-            // --- EJECUCIÓN ---
-            System.out.println("\n--- 5. Ejecución de Planes ---");
-            brigadaSalud.ejecutarPlanDeAccion();
-            brigadaInfra.ejecutarPlanDeAccion();
-
-            System.out.println("\n--- PRUEBA FINALIZADA CON ÉXITO ---");
-
-            try {
-                GestorArchivos.guardarObjeto("brigadas.dat", gestorBrigadas);
-            } catch (MiExcepcion e) {
-                System.err.println(e.getMessage());
+            // 3. Si está vacío, poblamos con datos de prueba
+            if (gestorInventario.obtenerTodoElInventario().isEmpty()) {
+                System.out.println("\n[!] Sistema vacío. Generando datos de prueba...");
+                poblarDatos(gestorInventario, gestorBrigadas, gestorVoluntarios, gestorActividades);
+                System.out.println("[!] Datos generados y guardados.");
+            } else {
+                System.out.println("\n[i] Datos encontrados. No se generarán duplicados.");
             }
 
+            // 4. Listar detalles para verificar integridad
+            listarDetalles(gestorInventario, gestorBrigadas, gestorVoluntarios, gestorActividades);
 
-
-        } catch (MiExcepcion e) {
-            System.err.println("ERROR CONTROLADO: " + e.getMessage());
         } catch (Exception e) {
-            System.err.println("ERROR INESPERADO: " + e.getMessage());
+            System.err.println("ERROR FATAL: " + e.getMessage());
             e.printStackTrace();
         }
+
+        System.out.println("\n=== FIN DEL PROGRAMA ===");
+    }
+
+    private static void poblarDatos(GestorInventario gi, GestorBrigadas gb, GestorVoluntarios gv, GestorActividades ga) throws MiExcepcion {
+        // Inventario
+        RecursoInventario r1 = gi.agregarRecurso("Vendas", 50, RecursoInventario.TipoRecurso.MEDICO);
+        RecursoInventario r2 = gi.agregarRecurso("Palas", 10, RecursoInventario.TipoRecurso.HERRAMIENTA);
+
+        // Voluntarios
+        VoluntarioMedico vm = new VoluntarioMedico("101", "Dr. House", "house@med.com", "555-1234", LocalDate.now(), "Diagnostico");
+        gv.registrarVoluntario(vm);
+
+        // Brigadas
+        Brigada bSalud = gb.crearBrigada("salud", "Brigada Roja", "Emergencias", "Urgencias");
+
+        // Asignar voluntario a brigada
+        // Nota: Aquí hay un detalle de diseño. El voluntario debería ser obtenido del gestor para asegurar que es la misma instancia
+        // o trabajar con IDs. El gestor de brigadas recibe el objeto Voluntario.
+        gb.agregarVoluntarioABrigada(bSalud.getId(), vm);
+
+        // Actividades
+        Actividad act = ga.crearActividad("Campaña Gripe", LocalDateTime.now().plusDays(2), "Parque Central");
+        ga.asignarRecursoAActividad(act.getId(), r1, 20);
+    }
+
+    private static void listarDetalles(GestorInventario gi, GestorBrigadas gb, GestorVoluntarios gv, GestorActividades ga) {
+        System.out.println("\n--- DETALLE DE DATOS ---");
+        System.out.println("1. Inventario:");
+        gi.obtenerTodoElInventario().forEach(System.out::println);
+
+        System.out.println("\n2. Voluntarios:");
+        gv.obtenerTodos().forEach(v -> System.out.println("- " + v.getNombre() + " (" + v.getId() + ")"));
+
+        System.out.println("\n3. Brigadas:");
+        for (Brigada b : gb.obtenerTodasLasBrigadas()) {
+            System.out.println("- " + b);
+            System.out.println("  Voluntarios asignados: " + b.consultarVoluntarios().size());
+        }
+
+        System.out.println("\n4. Actividades:");
+        ga.obtenerTodas().forEach(System.out::println);
     }
 }
