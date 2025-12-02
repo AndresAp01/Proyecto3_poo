@@ -12,10 +12,13 @@ import java.util.stream.Collectors;
 
 public class GestorVoluntarios implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    private static final String ARCHIVO_VOLUNTARIOS = "voluntarios.dat";
     private List<Voluntario> listaVoluntarios;
 
     public GestorVoluntarios() {
         this.listaVoluntarios = new ArrayList<>();
+        cargarDatos();
     }
 
     public void registrarVoluntario(Voluntario voluntario) throws MiExcepcion {
@@ -26,6 +29,7 @@ public class GestorVoluntarios implements Serializable {
             throw new MiExcepcion("Ya existe un voluntario con el ID: " + voluntario.getId());
         }
         listaVoluntarios.add(voluntario);
+        guardarDatos();
     }
 
     public Voluntario buscarVoluntarioPorId(String id) {
@@ -51,5 +55,25 @@ public class GestorVoluntarios implements Serializable {
             throw new MiExcepcion("Voluntario no encontrado.");
         }
         listaVoluntarios.remove(v);
+        guardarDatos();
+    }
+
+    private void guardarDatos() {
+        try {
+            GestorArchivos.guardarObjeto(ARCHIVO_VOLUNTARIOS, (ArrayList<Voluntario>) listaVoluntarios);
+        } catch (MiExcepcion e) {
+            System.err.println("Error al guardar voluntarios: " + e.getMessage());
+        }
+    }
+
+    private void cargarDatos() {
+        try {
+            ArrayList<Voluntario> datosCargados = GestorArchivos.cargarObjeto(ARCHIVO_VOLUNTARIOS, ArrayList.class);
+            if (datosCargados != null) {
+                this.listaVoluntarios = datosCargados;
+            }
+        } catch (MiExcepcion e) {
+            System.out.println("No se encontraron datos previos de voluntarios o error al cargar (se inicia vacio).");
+        }
     }
 }

@@ -16,12 +16,15 @@ import java.util.stream.Collectors;
 
 public class GestorBrigadas implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    private static final String ARCHIVO_BRIGADAS = "brigadas.dat";
     private List<Brigada> listaBrigadas;
     private int contadorIds;
 
     public GestorBrigadas() {
         this.listaBrigadas = new ArrayList<>();
         this.contadorIds = 1;
+        cargarDatos();
     }
 
     /**
@@ -58,6 +61,7 @@ public class GestorBrigadas implements Serializable {
                 throw new MiExcepcion("Tipo de brigada inválido: " + tipoBrigada);
         }
         listaBrigadas.add(nuevaBrigada);
+        guardarDatos();
         return nuevaBrigada;
     }
 
@@ -80,6 +84,7 @@ public class GestorBrigadas implements Serializable {
             // Esto es un placeholder. En un sistema real, se gestionaría con el GestorVoluntarios
         }
         listaBrigadas.remove(brigada);
+        guardarDatos();
     }
 
     public void agregarVoluntarioABrigada(int idBrigada, Voluntario voluntario) throws MiExcepcion {
@@ -91,6 +96,7 @@ public class GestorBrigadas implements Serializable {
             throw new MiExcepcion("Voluntario inválido.");
         }
         brigada.agregarVoluntario(voluntario);
+        guardarDatos();
         // Aquí se debería actualizar el estado del voluntario si es necesario (e.g., OCUPADO)
     }
 
@@ -103,6 +109,7 @@ public class GestorBrigadas implements Serializable {
             throw new MiExcepcion("Voluntario inválido.");
         }
         brigada.removerVoluntario(voluntario);
+        guardarDatos();
         // Aquí se debería actualizar el estado del voluntario si es necesario (e.g., DISPONIBLE)
     }
 
@@ -114,5 +121,45 @@ public class GestorBrigadas implements Serializable {
         return listaBrigadas.stream()
                 .filter(b -> b.getEstado() == estado)
                 .collect(Collectors.toList());
+    }
+
+    private void guardarDatos() {
+        try {
+            GestorArchivos.guardarObjeto(ARCHIVO_BRIGADAS, new BrigadasData(listaBrigadas, contadorIds));
+        } catch (MiExcepcion e) {
+            System.err.println("Error al guardar brigadas: " + e.getMessage());
+        }
+    }
+
+    private void cargarDatos() {
+        try {
+            BrigadasData datosCargados = GestorArchivos.cargarObjeto(ARCHIVO_BRIGADAS, BrigadasData.class);
+            if (datosCargados != null) {
+                this.listaBrigadas = datosCargados.getListaBrigadas();
+                this.contadorIds = datosCargados.getContadorIds();
+            }
+        } catch (MiExcepcion e) {
+            System.out.println("No se encontraron datos previos de brigadas o error al cargar (se inicia vacio).");
+        }
+    }
+
+    // Clase interna para persistencia
+    private static class BrigadasData implements Serializable {
+        private static final long serialVersionUID = 1L;
+        private List<Brigada> listaBrigadas;
+        private int contadorIds;
+
+        public BrigadasData(List<Brigada> listaBrigadas, int contadorIds) {
+            this.listaBrigadas = listaBrigadas;
+            this.contadorIds = contadorIds;
+        }
+
+        public List<Brigada> getListaBrigadas() {
+            return listaBrigadas;
+        }
+
+        public int getContadorIds() {
+            return contadorIds;
+        }
     }
 }

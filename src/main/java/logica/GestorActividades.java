@@ -13,12 +13,15 @@ import java.util.stream.Collectors;
 
 public class GestorActividades implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    private static final String ARCHIVO_ACTIVIDADES = "actividades.dat";
     private List<Actividad> listaActividades;
     private int contadorIds;
 
     public GestorActividades() {
         this.listaActividades = new ArrayList<>();
         this.contadorIds = 1;
+        cargarDatos();
     }
 
     public Actividad crearActividad(String objetivo, LocalDateTime fecha, String lugar) throws MiExcepcion {
@@ -31,6 +34,7 @@ public class GestorActividades implements Serializable {
 
         Actividad nueva = new Actividad(contadorIds++, objetivo, fecha, lugar);
         listaActividades.add(nueva);
+        guardarDatos();
         return nueva;
     }
 
@@ -46,6 +50,7 @@ public class GestorActividades implements Serializable {
         // pero eso depende de si consumimos el recurso ahora o al ejecutar la actividad.
         // Por ahora, solo registramos la asignación.
         actividad.asignarRecurso(recurso, cantidad);
+        guardarDatos();
     }
 
     public Actividad buscarActividad(int id) {
@@ -63,5 +68,45 @@ public class GestorActividades implements Serializable {
 
     public List<Actividad> obtenerTodas() {
         return new ArrayList<>(listaActividades);
+    }
+
+    private void guardarDatos() {
+        try {
+            GestorArchivos.guardarObjeto(ARCHIVO_ACTIVIDADES, new ActividadesData(listaActividades, contadorIds));
+        } catch (MiExcepcion e) {
+            System.err.println("Error al guardar actividades: " + e.getMessage());
+        }
+    }
+
+    private void cargarDatos() {
+        try {
+            ActividadesData datosCargados = GestorArchivos.cargarObjeto(ARCHIVO_ACTIVIDADES, ActividadesData.class);
+            if (datosCargados != null) {
+                this.listaActividades = datosCargados.getListaActividades();
+                this.contadorIds = datosCargados.getContadorIds();
+            }
+        } catch (MiExcepcion e) {
+            System.out.println("No se encontraron datos previos de actividades o error al cargar (se inicia vacio).");
+        }
+    }
+
+    // Clase interna para persistencia
+    private static class ActividadesData implements Serializable {
+        private static final long serialVersionUID = 1L;
+        private List<Actividad> listaActividades;
+        private int contadorIds;
+
+        public ActividadesData(List<Actividad> listaActividades, int contadorIds) {
+            this.listaActividades = listaActividades;
+            this.contadorIds = contadorIds;
+        }
+
+        public List<Actividad> getListaActividades() {
+            return listaActividades;
+        }
+
+        public int getContadorIds() {
+            return contadorIds;
+        }
     }
 }
