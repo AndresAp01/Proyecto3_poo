@@ -1,12 +1,13 @@
 package modelo.brigada;
 
+import modelo.materiales.RecursoInventario;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BrigadaDeInfraestructura extends Brigada {
 
     private String areaAsignada;
-    private List<String> inventarioHerramientas; // String provisional hasta tener clase Herramienta
+    private List<RecursoInventario> inventarioHerramientas;
 
     public BrigadaDeInfraestructura(int id, String nombre, String objetivoGeneral, String areaAsignada) {
         super(id, nombre, objetivoGeneral);
@@ -17,7 +18,6 @@ public class BrigadaDeInfraestructura extends Brigada {
     @Override
     public void ejecutarPlanDeAccion() {
         System.out.println("Iniciando obras de infraestructura en área: " + areaAsignada);
-        // Lógica específica: reparación, construcción, limpieza de escombros
         this.estado = EstadoBrigada.ACTIVA;
     }
 
@@ -29,11 +29,11 @@ public class BrigadaDeInfraestructura extends Brigada {
         this.areaAsignada = areaAsignada;
     }
 
-    public List<String> getInventarioHerramientas() {
+    public List<RecursoInventario> getInventarioHerramientas() {
         return inventarioHerramientas;
     }
 
-    public void setInventarioHerramientas(List<String> inventarioHerramientas) {
+    public void setInventarioHerramientas(List<RecursoInventario> inventarioHerramientas) {
         this.inventarioHerramientas = inventarioHerramientas;
     }
 }
