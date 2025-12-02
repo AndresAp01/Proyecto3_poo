@@ -120,7 +120,7 @@ Se ha progresado en la implementación de componentes esenciales del modelo:
 
 #### 3. Manejo de Errores
 
-- Se creó la clase `util.MiExcepcion` (anteriormente `AppException`), una excepción personalizada que hereda de
+- Se creó la clase `util.MiExcepcion`, una excepción personalizada que hereda de
   `Exception`, permitiendo un manejo de errores más específico y centralizado.
 
 ### Próximos Pasos
