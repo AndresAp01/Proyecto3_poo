@@ -23,8 +23,10 @@ public class BrigadaDeInfraestructura extends Brigada {
             System.out.println("Sin actividades por realizar");
         }
         System.out.println("Iniciando obras de infraestructura en área: " + areaAsignada);
-        Actividad ultima = listaActividades.getLast();
-        ultima.setEstado(Actividad.EstadoActividad.EN_PROGRESO);
+        Actividad ultima = listaActividades.removeLast();
+        ultima.setEstado(Actividad.EstadoActividad.REALIZADA);
+        actividadesCompletadas.add(ultima);
+
         this.estado = EstadoBrigada.ACTIVA;
     }
 

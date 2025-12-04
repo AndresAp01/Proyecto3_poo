@@ -23,8 +23,9 @@ public class BrigadaDeSalud extends Brigada {
             System.out.println("Sin actividades por realizar");
         }
         System.out.println("Ejecutando plan de salud: " + tipoAtencion);
-        Actividad ultima = listaActividades.getLast();
-        ultima.setEstado(Actividad.EstadoActividad.EN_PROGRESO);
+        Actividad ultima = listaActividades.removeLast();
+        ultima.setEstado(Actividad.EstadoActividad.REALIZADA);
+        actividadesCompletadas.add(ultima);
         this.estado = EstadoBrigada.ACTIVA;
     }
 

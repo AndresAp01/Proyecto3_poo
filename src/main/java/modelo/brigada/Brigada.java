@@ -16,6 +16,7 @@ public abstract class Brigada implements Serializable {
     protected EstadoBrigada estado;
     protected List<Voluntario> listaVoluntarios;
     protected List<Actividad> listaActividades;
+    protected List<Actividad> actividadesCompletadas;
     public Brigada(int id, String nombre, String objetivoGeneral) {
         this.id = id;
         this.nombre = nombre;

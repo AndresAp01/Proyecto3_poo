@@ -30,6 +30,4 @@ public class Coordinador extends Usuario {
     public void planificarActividad(Control control, String objetivo, LocalDateTime fecha, String lugar) throws MiExcepcion {
         control.getGestorActividades().crearActividad(objetivo, fecha, lugar);
     }
-
-    // etc. puedes ir agregando más métodos de alto nivel
 }

@@ -27,8 +27,9 @@ public class BrigadaDeSeguridad extends Brigada {
             System.out.println("Sin actividades por realizar");
         }
         System.out.println("Desplegando seguridad en zonas: " + zonasDeVigilancia);
-        Actividad ultima = listaActividades.getLast();
-        ultima.setEstado(Actividad.EstadoActividad.EN_PROGRESO);
+        Actividad ultima = listaActividades.removeLast();
+        ultima.setEstado(Actividad.EstadoActividad.REALIZADA);
+        actividadesCompletadas.add(ultima);
         this.estado = EstadoBrigada.ACTIVA;
     }
 
