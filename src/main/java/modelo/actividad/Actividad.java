@@ -35,6 +35,10 @@ public class Actividad implements Serializable {
         }
     }
 
+    public void removerRecurso(RecursoInventario recurso) {
+        recursosAsignados.remove(recurso);
+    }
+
     public Map<RecursoInventario, Integer> getRecursosAsignados() {
         return new HashMap<>(recursosAsignados);
     }
@@ -60,6 +64,7 @@ public class Actividad implements Serializable {
         return fechaInicio;
     }
 
+
     public void setFechaInicio(LocalDateTime fecha) {
         this.fechaInicio = fecha;
     }
@@ -67,7 +72,9 @@ public class Actividad implements Serializable {
     public LocalDateTime getFechaFin() {
         return fechaFin;
     }
-    public void setFechaFin(LocalDateTime fecha) {}
+    public void setFechaFin(LocalDateTime fecha) {
+        this.fechaFin = fecha;
+    }
 
     public String getLugar() {
         return lugar;

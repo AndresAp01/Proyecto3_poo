@@ -47,9 +47,6 @@ public class GestorActividades implements Serializable {
         if (recurso == null) {
             throw new MiExcepcion("Recurso inválido.");
         }
-        // Aquí se podría validar si hay suficiente inventario antes de asignar, 
-        // pero eso depende de si consumimos el recurso ahora o al ejecutar la actividad.
-        // Por ahora, solo registramos la asignación.
         actividad.asignarRecurso(recurso, cantidad);
         guardarDatos();
     }

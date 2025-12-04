@@ -24,6 +24,18 @@ public class Coordinador extends Usuario {
         this.codigoEmpleado = codigoEmpleado;
     }
 
+    public String getCodigoEmpleado() {
+        return codigoEmpleado;
+    }
+
+    public void setCodigoEmpleado(String codigoEmpleado) {
+        this.codigoEmpleado = codigoEmpleado;
+    }
+
+    public void registrarVoluntario(Control control, Voluntario v) throws MiExcepcion{
+        control.getGestorVoluntarios().registrarVoluntario(v);
+    }
+
     public void registrarBrigada(Control control, String tipoBrigada, String nombre, String objetivoGeneral) throws MiExcepcion {
         control.getGestorBrigadas().crearBrigada(tipoBrigada, nombre, objetivoGeneral);
     }

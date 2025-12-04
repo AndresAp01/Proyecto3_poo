@@ -14,9 +14,11 @@ public class GestorUsuarios implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final String ARCHIVO_USUARIOS = "usuarios.dat";
     private List<Usuario> listaUsuarios;
+    private int contadorIds;
 
     public GestorUsuarios() {
         this.listaUsuarios = new ArrayList<>();
+        this.contadorIds = 1;
         cargarDatos();
     }
 
@@ -27,6 +29,7 @@ public class GestorUsuarios implements Serializable {
         if (buscarUsuarioPorId(usuario.getId()) != null) {
             throw new MiExcepcion("Ya existe un usuario registrado con el ID: " + usuario.getId());
         }
+        usuario.setId(Integer.toString(++contadorIds));
         listaUsuarios.add(usuario);
         guardarDatos();
     }

@@ -38,4 +38,12 @@ public abstract class Usuario implements Serializable {
     public String getTelefono() {
         return telefono;
     }
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    @Override
+    public String toString() {
+        return nombre + " (" + id + ")";
+    }
 }

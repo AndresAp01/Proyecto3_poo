@@ -49,6 +49,10 @@ public abstract class Brigada implements Serializable {
         return new ArrayList<>(listaActividades);
     }
 
+    public List<Actividad> getActividadesCompletadas() {
+        return actividadesCompletadas;
+    }
+
     // Método polimórfico principal
     public abstract void ejecutarPlanDeAccion();
 

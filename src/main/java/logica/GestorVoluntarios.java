@@ -15,9 +15,11 @@ public class GestorVoluntarios implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final String ARCHIVO_VOLUNTARIOS = "voluntarios.dat";
     private List<Voluntario> listaVoluntarios;
+    private int contadorIds;
 
     public GestorVoluntarios() {
         this.listaVoluntarios = new ArrayList<>();
+        this.contadorIds = 1;
         cargarDatos();
     }
 
@@ -28,6 +30,7 @@ public class GestorVoluntarios implements Serializable {
         if (buscarVoluntarioPorId(voluntario.getId()) != null) {
             throw new MiExcepcion("Ya existe un voluntario con el ID: " + voluntario.getId());
         }
+        voluntario.setId(Integer.toString(contadorIds++));
         listaVoluntarios.add(voluntario);
         guardarDatos();
     }
