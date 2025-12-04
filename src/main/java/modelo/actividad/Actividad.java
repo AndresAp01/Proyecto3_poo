@@ -12,17 +12,18 @@ public class Actividad implements Serializable {
 
     private int id;
     private String objetivo;
-    private LocalDateTime fecha;
+    private LocalDateTime fechaInicio;
+    private LocalDateTime fechaFin;
     private String lugar;
     private EstadoActividad estado;
     private String resultados;
-    // Optimización: Map<Recurso, Cantidad> reemplaza a la clase InventarioAsignado
+    private TipoActividad tipo;
     private Map<RecursoInventario, Integer> recursosAsignados;
 
-    public Actividad(int id, String objetivo, LocalDateTime fecha, String lugar) {
+    public Actividad(int id, String objetivo, LocalDateTime fecha, String lugar, TipoActividad tipo) {
         this.id = id;
         this.objetivo = objetivo;
-        this.fecha = fecha;
+        this.fechaInicio = fecha;
         this.lugar = lugar;
         this.estado = EstadoActividad.PENDIENTE;
         this.recursosAsignados = new HashMap<>();
@@ -55,13 +56,18 @@ public class Actividad implements Serializable {
         this.objetivo = objetivo;
     }
 
-    public LocalDateTime getFecha() {
-        return fecha;
+    public LocalDateTime getFechaInicio() {
+        return fechaInicio;
     }
 
-    public void setFecha(LocalDateTime fecha) {
-        this.fecha = fecha;
+    public void setFechaInicio(LocalDateTime fecha) {
+        this.fechaInicio = fecha;
     }
+
+    public LocalDateTime getFechaFin() {
+        return fechaFin;
+    }
+    public void setFechaFin(LocalDateTime fecha) {}
 
     public String getLugar() {
         return lugar;

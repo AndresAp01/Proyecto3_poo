@@ -2,6 +2,7 @@ package modelo.usuarios;
 
 import logica.Control;
 import modelo.actividad.Actividad;
+import modelo.actividad.TipoActividad;
 import modelo.brigada.Brigada;
 import modelo.voluntarios.Voluntario;
 import util.MiExcepcion;
@@ -23,11 +24,11 @@ public class Coordinador extends Usuario {
         this.codigoEmpleado = codigoEmpleado;
     }
 
-    public void registrarBrigada(Control control, String tipoBrigada, String nombre, String objetivoGeneral, String parametroEspecifico) throws MiExcepcion {
-        control.getGestorBrigadas().crearBrigada(tipoBrigada, nombre, objetivoGeneral, parametroEspecifico);
+    public void registrarBrigada(Control control, String tipoBrigada, String nombre, String objetivoGeneral) throws MiExcepcion {
+        control.getGestorBrigadas().crearBrigada(tipoBrigada, nombre, objetivoGeneral);
     }
 
-    public void planificarActividad(Control control, String objetivo, LocalDateTime fecha, String lugar) throws MiExcepcion {
-        control.getGestorActividades().crearActividad(objetivo, fecha, lugar);
+    public void planificarActividad(Control control, String objetivo, LocalDateTime fecha, String lugar, TipoActividad tipo) throws MiExcepcion {
+        control.getGestorActividades().crearActividad(objetivo, fecha, lugar, tipo);
     }
 }

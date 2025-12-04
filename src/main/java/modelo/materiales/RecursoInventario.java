@@ -1,6 +1,7 @@
 package modelo.materiales;
 
 import java.io.Serializable;
+import modelo.materiales.TipoRecurso;
 
 public class RecursoInventario implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -9,6 +10,7 @@ public class RecursoInventario implements Serializable {
     private String nombre;
     private int cantidadDisponible;
     private TipoRecurso tipo;
+
     public RecursoInventario(int id, String nombre, int cantidadDisponible, TipoRecurso tipo) {
         this.id = id;
         this.nombre = nombre;
@@ -66,12 +68,5 @@ public class RecursoInventario implements Serializable {
     @Override
     public String toString() {
         return nombre + " (" + tipo + "): " + cantidadDisponible;
-    }
-
-    public enum TipoRecurso {
-        MEDICO,
-        HERRAMIENTA,
-        MATERIAL_CONSTRUCCION,
-        OTRO
     }
 }

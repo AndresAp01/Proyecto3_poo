@@ -57,7 +57,7 @@ public class GeneradorReportes {
             writer.newLine();
             if (actividades.isEmpty()) writer.write("No hay actividades registradas.");
             for (Actividad a : actividades) {
-                writer.write(String.format("- [%d] %s en %s (%s)", a.getId(), a.getObjetivo(), a.getLugar(), a.getFecha().toLocalDate()));
+                writer.write(String.format("- [%d] %s en %s (%s)", a.getId(), a.getObjetivo(), a.getLugar(), a.getFechaInicio().toLocalDate()));
                 writer.newLine();
                 writer.write("  Estado: " + a.getEstado());
                 writer.newLine();

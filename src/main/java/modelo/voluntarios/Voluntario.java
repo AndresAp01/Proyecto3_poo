@@ -26,17 +26,10 @@ public abstract class Voluntario extends Usuario {
                 && estado == EstadoVoluntario.ACTIVO;
     }
 
-    /**
-     * RF-05: el coordinador pregunta
-     * si el voluntario puede participar en una actividad específica.
-     */
     //Recibe brigada como parametro, segun tipo de voluntario,
     // determina si puede participar en esta
     public abstract boolean puedeParticipar(Brigada brigada);
 
-    /**
-     * RF-09: notificacion de convocatoria urgente a actividad.
-     */
     //toma actividad como parametro para notificar sobre actividad
     public void notificarConvocatoriaUrgente() {
         System.out.println("Notificando a " + nombre +

@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import modelo.materiales.TipoRecurso;
 
 public class GestorInventario implements Serializable {
 
@@ -22,7 +23,7 @@ public class GestorInventario implements Serializable {
         cargarDatos();
     }
 
-    public RecursoInventario agregarRecurso(String nombre, int cantidad, RecursoInventario.TipoRecurso tipo) throws MiExcepcion {
+    public RecursoInventario agregarRecurso(String nombre, int cantidad, TipoRecurso tipo) throws MiExcepcion {
         if (nombre == null || nombre.trim().isEmpty()) {
             throw new MiExcepcion("El nombre del recurso no puede estar vacío.");
         }

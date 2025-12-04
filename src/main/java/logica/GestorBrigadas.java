@@ -34,11 +34,10 @@ public class GestorBrigadas implements Serializable {
      * @param tipoBrigada         Tipo de brigada a crear (Salud, Infraestructura, Seguridad).
      * @param nombre              Nombre de la brigada.
      * @param objetivoGeneral     Objetivo general de la brigada.
-     * @param parametroEspecifico Parámetro específico según el tipo de brigada (e.g., tipoAtencion para Salud).
      * @return La brigada recién creada.
      * @throws MiExcepcion Si el tipo de brigada es inválido o faltan parámetros.
      */
-    public Brigada crearBrigada(String tipoBrigada, String nombre, String objetivoGeneral, String parametroEspecifico) throws MiExcepcion {
+    public Brigada crearBrigada(String tipoBrigada, String nombre, String objetivoGeneral) throws MiExcepcion {
         if (nombre == null || nombre.trim().isEmpty()) {
             throw new MiExcepcion("El nombre de la brigada no puede ser vacío.");
         }
@@ -49,10 +48,10 @@ public class GestorBrigadas implements Serializable {
         Brigada nuevaBrigada;
         switch (tipoBrigada.toLowerCase()) {
             case "salud":
-                nuevaBrigada = new BrigadaDeSalud(contadorIds++, nombre, objetivoGeneral, parametroEspecifico);
+                nuevaBrigada = new BrigadaDeSalud(contadorIds++, nombre, objetivoGeneral);
                 break;
             case "infraestructura":
-                nuevaBrigada = new BrigadaDeInfraestructura(contadorIds++, nombre, objetivoGeneral, parametroEspecifico);
+                nuevaBrigada = new BrigadaDeInfraestructura(contadorIds++, nombre, objetivoGeneral);
                 break;
             case "seguridad":
                 nuevaBrigada = new BrigadaDeSeguridad(contadorIds++, nombre, objetivoGeneral);

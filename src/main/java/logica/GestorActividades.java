@@ -1,6 +1,7 @@
 package logica;
 
 import modelo.actividad.Actividad;
+import modelo.actividad.TipoActividad;
 import modelo.materiales.RecursoInventario;
 import util.GestorArchivos;
 import util.MiExcepcion;
@@ -24,7 +25,7 @@ public class GestorActividades implements Serializable {
         cargarDatos();
     }
 
-    public Actividad crearActividad(String objetivo, LocalDateTime fecha, String lugar) throws MiExcepcion {
+    public Actividad crearActividad(String objetivo, LocalDateTime fecha, String lugar, TipoActividad tipo) throws MiExcepcion {
         if (objetivo == null || objetivo.trim().isEmpty()) {
             throw new MiExcepcion("El objetivo de la actividad es obligatorio.");
         }
@@ -32,7 +33,7 @@ public class GestorActividades implements Serializable {
             throw new MiExcepcion("La fecha debe ser futura o válida.");
         }
 
-        Actividad nueva = new Actividad(contadorIds++, objetivo, fecha, lugar);
+        Actividad nueva = new Actividad(contadorIds++, objetivo, fecha, lugar, tipo);
         listaActividades.add(nueva);
         guardarDatos();
         return nueva;

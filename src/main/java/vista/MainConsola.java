@@ -5,8 +5,10 @@ import logica.GestorBrigadas;
 import logica.GestorInventario;
 import logica.GestorVoluntarios;
 import modelo.actividad.Actividad;
+import modelo.actividad.TipoActividad;
 import modelo.brigada.Brigada;
 import modelo.materiales.RecursoInventario;
+import modelo.materiales.TipoRecurso;
 import modelo.voluntarios.VoluntarioMedico;
 import util.MiExcepcion;
 
@@ -55,15 +57,15 @@ public class MainConsola {
 
     private static void poblarDatos(GestorInventario gi, GestorBrigadas gb, GestorVoluntarios gv, GestorActividades ga) throws MiExcepcion {
         // Inventario
-        RecursoInventario r1 = gi.agregarRecurso("Vendas", 50, RecursoInventario.TipoRecurso.MEDICO);
-        RecursoInventario r2 = gi.agregarRecurso("Palas", 10, RecursoInventario.TipoRecurso.HERRAMIENTA);
+        RecursoInventario r1 = gi.agregarRecurso("Vendas", 50, TipoRecurso.MEDICO);
+        RecursoInventario r2 = gi.agregarRecurso("Palas", 10, TipoRecurso.HERRAMIENTA);
 
         // Voluntarios
         VoluntarioMedico vm = new VoluntarioMedico("101", "Dr. House", "house@med.com", "555-1234", LocalDate.now(), "Diagnostico");
         gv.registrarVoluntario(vm);
 
         // Brigadas
-        Brigada bSalud = gb.crearBrigada("salud", "Brigada Roja", "Emergencias", "Urgencias");
+        Brigada bSalud = gb.crearBrigada("salud", "Brigada Roja", "Emergencias");
 
         // Asignar voluntario a brigada
         // Nota: Aquí hay un detalle de diseño. El voluntario debería ser obtenido del gestor para asegurar que es la misma instancia
@@ -71,7 +73,7 @@ public class MainConsola {
         gb.agregarVoluntarioABrigada(bSalud.getId(), vm);
 
         // Actividades
-        Actividad act = ga.crearActividad("Campaña Gripe", LocalDateTime.now().plusDays(2), "Parque Central");
+        Actividad act = ga.crearActividad("Campaña Gripe", LocalDateTime.now().plusDays(2), "Parque Central", TipoActividad.algo);
         ga.asignarRecursoAActividad(act.getId(), r1, 20);
     }
 
